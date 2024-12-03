@@ -1,0 +1,99 @@
+.Login {
+  height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom,rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52)),url(background.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+
+
+.main-container {
+  width: 320px;
+  border-radius: 0.75rem;
+  background-color: #000000;
+  padding: 2rem;
+  color: rgba(243, 244, 246, 1);
+}
+
+.main-container h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  color: rgba(156, 163, 175, 1);
+  margin-bottom: 4px;
+}
+
+.form-group input {
+  padding: 0.8rem;
+  font-size: 1rem;
+  background: #5a2a3a; /* Dark maroon color similar to the sample */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+}
+
+.form-group input:focus {
+  border-color: rgba(167, 139, 250);
+}
+
+.submit-container {
+  margin-top: 1rem;
+}
+
+.btn-primary {
+  display: block;
+  width: 100%;
+  background-color: green;
+  padding: 0.75rem;
+  text-align: center;
+  color: rgba(17, 24, 39, 1);
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.btn:hover {
+  background-color: green;
+}
+
+.register-container {
+  grid-column: span 2; /* Centers the login text below the form */
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #aaa;
+  text-align: center;
+}
+
+.register-container a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.register-container a:hover {
+  text-decoration: underline;
+}
