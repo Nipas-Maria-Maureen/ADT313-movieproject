@@ -37,7 +37,7 @@ const Form = () => {
     axios.get(`https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${currentPage}`, {
       headers: {
         Accept: "application/json",
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTdiNmUyNGJkNWRkNjhiNmE1ZWFjZjgyNWY3NGY5ZCIsIm5iZiI6MTcyOTI5NzI5Ny4wNzMzNTEsInN1YiI6IjY2MzhlZGM0MmZhZjRkMDEzMGM2NzM3NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZIX4EF2yAKl6NwhcmhZucxSQi1rJDZiGG80tDd6_9XI',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A',  // Replace with actual API key',
       },
     })
       .then((response) => {
@@ -78,7 +78,7 @@ const Form = () => {
     axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/videos?language=en-US`, {
       headers: {
         Accept: "application/json",
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTdiNmUyNGJkNWRkNjhiNmE1ZWFjZjgyNWY3NGY5ZCIsIm5iZiI6MTcyOTI5NzI5Ny4wNzMzNTEsInN1YiI6IjY2MzhlZGM0MmZhZjRkMDEzMGM2NzM3NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZIX4EF2yAKl6NwhcmhZucxSQi1rJDZiGG80tDd6_9XI',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A',  // Replace with actual API key',
       },
     })
     .then(response => {
@@ -92,7 +92,7 @@ const Form = () => {
     axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/credits?language=en-US`, {
       headers: {
         Accept: "application/json",
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTdiNmUyNGJkNWRkNjhiNmE1ZWFjZjgyNWY3NGY5ZCIsIm5iZiI6MTcyOTI5NzI5Ny4wNzMzNTEsInN1YiI6IjY2MzhlZGM0MmZhZjRkMDEzMGM2NzM3NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZIX4EF2yAKl6NwhcmhZucxSQi1rJDZiGG80tDd6_9XI',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A',  // Replace with actual API key',
       },
     })
     .then(response => {
@@ -210,7 +210,7 @@ const Form = () => {
           return axios.get(`https://api.themoviedb.org/3/movie/${movieData.tmdbId}/videos?language=en-US`, {
             headers: {
               Accept: "application/json",
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTdiNmUyNGJkNWRkNjhiNmE1ZWFjZjgyNWY3NGY5ZCIsIm5iZiI6MTcyOTI5NzI5Ny4wNzMzNTEsInN1YiI6IjY2MzhlZGM0MmZhZjRkMDEzMGM2NzM3NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZIX4EF2yAKl6NwhcmhZucxSQi1rJDZiGG80tDd6_9XI', // Replace with actual API key
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A',  // Replace with actual API key
             },
           });
         })
@@ -225,7 +225,7 @@ const Form = () => {
       axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`, {
         headers: {
           Accept: "application/json",
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTdiNmUyNGJkNWRkNjhiNmE1ZWFjZjgyNWY3NGY5ZCIsIm5iZiI6MTcyOTI5NzI5Ny4wNzMzNTEsInN1YiI6IjY2MzhlZGM0MmZhZjRkMDEzMGM2NzM3NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZIX4EF2yAKl6NwhcmhZucxSQi1rJDZiGG80tDd6_9XI',  // Replace with actual API key
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A',  // Replace with actual API key
         },
       })
       .then(response => {
