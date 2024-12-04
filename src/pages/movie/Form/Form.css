@@ -3,139 +3,130 @@
 }
 .searched-movie {
   max-height: 200px;
-  overflow-y: hidden;
-}
-.search-container{
-  margin-bottom: 10px;
+  overflow-y: auto;
 }
 .search-container p:hover {
   background-color: lightblue;
 }
 .container{
   width: 70%;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.8)
+    ),
+    url(backgroundmovie.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 .movie-details {
   display: flex;
-  align-items: flex-start;
-  margin-bottom: 20px;
+  align-items: flex-start; /* Align items at the start */
+  margin-bottom: 20px; /* Space below the movie details section */
 }
+
 .poster-image {
-  width: 200px;
-  height: auto;
-  margin-right: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  width: 200px; /* Set a fixed width for the poster */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 20px; /* Space between the poster and the form */
+  border-radius: 8px; /* Rounded corners for the poster */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
-.search{
-  background-color: blue;
-  height: 30px;
-}
+
 .form-fields {
-  flex: 1;
+  flex: 1; /* Take up remaining space */
 }
+
 .field {
-  margin-bottom: 15px;
+  margin-bottom: 15px; /* Space between fields */
 }
+
 .field label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  display: block; /* Make labels block elements */
+  margin-bottom: 5px; /* Space between label and input */
+  font-weight: bold; /* Bold labels for emphasis */
 }
+
 .field input,
 .field textarea {
-  width: 70.3vw;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 70vw; /* Full width for inputs */
+  padding: 10px; /* Padding inside the inputs */
+  border: 1px solid #ccc; /* Border style */
+  border-radius: 4px; /* Rounded corners for inputs */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
 }
+
 .field textarea {
-  resize: vertical;
+  resize: vertical; /* Allow vertical resizing */
 }
+
 .field input:disabled,
 .field textarea:disabled {
-  background-color: #f5f5f5;
+  background-color: #f5f5f5; /* Light background for disabled inputs */
 }
 .videos, .cast {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap to the next line if there's not enough space */
+  gap: 20px; /* Space between items */
+  margin: 20px 0; /* Top and bottom margin */
+  
+}
+.btn {
+  background-color: #28a745;
+  width: 140px; /* Slightly wider for consistency */
+  border-radius: 4;
+}
+
+.btn:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+.video-item, .cast-item {
+  flex: 1 1 300px; /* Flex-grow, flex-shrink, flex-basis */
+  max-width: 300px; /* Maximum width for each item */
+  text-align: center; /* Center align text */
+}
+
+.video-item iframe {
+  width: 100%; /* Make the iframe responsive */
+  height: 200px; /* Fixed height for videos */
+}
+
+.cast {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   margin: 20px 0;
+  justify-content: center; /* Center align the items */
 }
-.video-item, .cast-item {
-  flex: 1 1 300px;
-  max-width: 300px;
-  text-align: center;
-}
-.video-item iframe {
-  width: 100%;
-  height: 200px;
-}
+
 .cast-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.cast-item img {
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-}
-.btn-save {
-  display: block;
-  width: 85.5vw;
-  background-color: #e50914;
-  padding: 0.75rem;
   text-align: center;
-  color: #fff;
-  border: none;
-  font-size: 1.1rem;
-  font-weight: 800;
-  margin-top: 10px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex: 1 1 200px; /* Flex-grow, flex-shrink, and flex-basis */
+  max-width: 200px; /* Limit the width of each cast item */
 }
-.btn-save:hover {
-  background-color: #e01235;
-  transform: scale(1.02);
-}
-.cancel {
-  display: block;
-  width: 85.5vw;
-  background-color: #222222;
-  padding: 0.75rem;
-  text-align: center;
-  color: #fff;
-  border: none;
-  font-size: 1.1rem;
-  font-weight: 800;
-  margin-top: 10px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.cancel:hover {
-  background-color: #333333;
-  transform: scale(1.02);
-}
-.pagination-button {
-  background-color: #e50914;
-  color: white;
-  font-size: 16px;
+
+.cast-item h3 {
+  font-size: 1.1rem; /* Adjust the font size of cast names */
   font-weight: bold;
-  text-align: center;
-  border: none;
-  width: 100px;
-  margin-top: 8px;
-  margin-inline: 5px;
-  border-radius: 4px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 10px;
 }
-.pagination-button:hover:not(:disabled) {
-  background-color: #f40612;
-  transform: scale(1.05);
+
+.cast-item p {
+  font-size: 0.9rem;
+  color: #555;
 }
-.pagination-button:disabled {
-  background-color: #555;
-  cursor: not-allowed;
+
+.cast-item img {
+  width: 100%;
+  height: auto;
+  max-width: 150px; /* Limit image size */
+  border-radius: 50%; /* Make images circular */
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+}
+
+.cast-item img:hover {
+  transform: scale(1.05); /* Add a slight zoom effect on hover */
+  transition: transform 0.3s ease-in-out;
 }
