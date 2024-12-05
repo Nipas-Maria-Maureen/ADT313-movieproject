@@ -73,13 +73,13 @@
   
 }
 .btn {
-  background-color: #28a745;
+  background-color: beige;
   width: 140px; /* Slightly wider for consistency */
   border-radius: 4;
 }
 
 .btn:hover {
-  background-color: #218838; /* Darker green on hover */
+  background-color: beige; /* Darker green on hover */
 }
 .video-item, .cast-item {
   flex: 1 1 300px; /* Flex-grow, flex-shrink, flex-basis */
