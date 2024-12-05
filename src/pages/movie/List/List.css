@@ -30,11 +30,11 @@ button {
 }
 
 .delete {
-  background-color: #e50914;
+  background-color: burlywood;
 }
 
 .delete:hover {
-  background-color: #e01235;
+  background-color: burlywood;
   transform: scale(1.05);
 }
 
@@ -43,11 +43,11 @@ button {
 }
 
 .edit {
-  background-color: #ffa00a;
+  background-color: bisque;
 }
 
 .edit:hover {
-  background-color: #ffb422;
+  background-color: burlywood;
   transform: scale(1.05);
 }
 
@@ -61,7 +61,7 @@ button {
 }
 
 .create {
-  background-color: #e50914;
+  background-color: bisque;
   font-size: 16px;
   font-weight: bold;
   border: none;
@@ -74,7 +74,7 @@ button {
 }
 
 .create:hover {
-  background-color: #f40612;
+  background-color: burlywood;
   transform: scale(1.05);
 }
 
