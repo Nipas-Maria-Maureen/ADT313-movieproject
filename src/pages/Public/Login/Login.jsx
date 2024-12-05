@@ -8,60 +8,54 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isFieldsDirty, setIsFieldsDirty] = useState(false);
+  const [isShowPassword, setIsShowPassword] = useState(false);
+  const [status, setStatus] = useState('idle');
   const emailRef = useRef();
   const passwordRef = useRef();
-  const [isShowPassword, setIsShowPassword] = useState(false);
+  const navigate = useNavigate();
   const userInputDebounce = useDebounce({ email, password }, 2000);
   const [debounceState, setDebounceState] = useState(false);
-  const [status, setStatus] = useState('idle');
-
-  const navigate = useNavigate();
 
   const handleShowPassword = useCallback(() => {
-    setIsShowPassword((value) => !value);
-  }, [isShowPassword]);
+    setIsShowPassword((prev) => !prev);
+  }, []);
 
   const handleOnChange = (event, type) => {
     setDebounceState(false);
     setIsFieldsDirty(true);
 
-    switch (type) {
-      case 'email':
-        setEmail(event.target.value);
-
-        break;
-
-      case 'password':
-        setPassword(event.target.value);
-        break;
-
-      default:
-        break;
-    }
+    if (type === 'email') setEmail(event.target.value);
+    if (type === 'password') setPassword(event.target.value);
   };
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      setIsFieldsDirty(true);
+      if (!email) emailRef.current.focus();
+      if (!password) passwordRef.current.focus();
+      return;
+    }
+
     const data = { email, password };
     setStatus('loading');
-    console.log(data);
-
-    await axios({
-      method: 'post',
-      url: '/admin/login',
-      data,
-      headers: { 'Access-Control-Allow-Origin': '*' },
-    })
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem('accessToken', res.data.access_token);
-        navigate('/main/movies');
-        setStatus('idle');
-      })
-      .catch((e) => {
-        console.log(e);
-        setStatus('idle');
-        
+    try {
+      const res = await axios.post('/admin/login', data, {
+        headers: { 'Access-Control-Allow-Origin': '*' },
       });
+      localStorage.setItem('accessToken', res.data.access_token);
+      navigate('/main/movies');
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setStatus('idle');
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleLogin();
+    }
   };
 
   useEffect(() => {
@@ -69,89 +63,66 @@ function Login() {
   }, [userInputDebounce]);
 
   return (
-    <div className='Login'>
-      <div className='main-container'>
+    <div className="Login" onKeyDown={handleKeyDown}>
+      <div className="main-container">
         <h3>Sign In</h3>
         <form>
-          <div className='form-container'>
+          <div className="form-container">
             <div>
-              <div className='form-group'>
+              <div className="form-group">
                 <label>E-mail:</label>
                 <input
-                  type='text'
-                  name='email'
+                  type="text"
+                  name="email"
                   ref={emailRef}
                   onChange={(e) => handleOnChange(e, 'email')}
+                  value={email}
                 />
               </div>
-              {debounceState && isFieldsDirty && email == '' && (
-                <span className='errors'>This field is required</span>
+              {debounceState && isFieldsDirty && !email && (
+                <span className="errors">This field is required</span>
               )}
             </div>
             <div>
-              <div className='form-group'>
+              <div className="form-group">
                 <label>Password:</label>
                 <input
                   type={isShowPassword ? 'text' : 'password'}
-                  name='password'
+                  name="password"
                   ref={passwordRef}
                   onChange={(e) => handleOnChange(e, 'password')}
+                  value={password}
                 />
               </div>
-              {debounceState && isFieldsDirty && password == '' && (
-                <span className='errors'>This field is required</span>
+              {debounceState && isFieldsDirty && !password && (
+                <span className="errors">This field is required</span>
               )}
             </div>
-            <div className='show-password' onClick={handleShowPassword}>
+            <div
+              className="show-password"
+              onClick={handleShowPassword}
+              role="button"
+              tabIndex={0}
+            >
               {isShowPassword ? 'Hide' : 'Show'} Password
             </div>
 
-            <div className='submit-container'>
-  <button
-    className='btn-primary'
-    type='button'
-    disabled={status === 'loading'}
-    onClick={() => {
-      if (status === 'loading') {
-        return;
-      }
-
-      if (email && password) {
-        // Set loading status
-        setStatus('loading');
-
-        // Add a delay before proceeding
-        setTimeout(() => {
-          handleLogin({
-            type: 'login',
-            user: { email, password },
-          });
-
-          // Reset status after the delay
-          setStatus('idle');
-        }, 2000); // 2 seconds delay
-      } else {
-        setIsFieldsDirty(true);
-        if (email === '') {
-          emailRef.current.focus();
-        }
-
-        if (password === '') {
-          passwordRef.current.focus();
-        }
-      }
-    }}
-  >
-    {status === 'idle' ? 'Login' : 'Loading, Please wait...'}
-  </button>
-</div>
-            <div className='register-container'>
+            <div className="submit-container">
+              <button
+                className="btn-primary"
+                type="button"
+                disabled={status === 'loading'}
+                onClick={handleLogin}
+              >
+                {status === 'idle' ? 'Login' : 'Loading, Please wait...'}
+              </button>
+            </div>
+            <div className="register-container">
               <small>Don't have an account? </small>
-              <a href='/register'>
+              <a href="/register">
                 <small>Register</small>
               </a>
             </div>
-
           </div>
         </form>
       </div>
