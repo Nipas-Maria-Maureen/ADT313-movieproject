@@ -19,6 +19,7 @@ const Form = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [videos, setVideos] = useState([]);
+  const [photos, setPhotos] = useState([]);
   const [cast, setCast] = useState([]);
 
   const { movieId } = useParams();
@@ -37,7 +38,7 @@ const Form = () => {
     axios.get(`https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${currentPage}`, {
       headers: {
         Accept: "application/json",
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A',  // Replace with actual API key',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwOGNmNjliZTNkOTE5MGE1Njk1ZDJmMTc4MzkxN2UzYiIsIm5iZiI6MTczMzM2NzQ3Mi4zMywic3ViIjoiNjc1MTE2YjA5OTA5MWU1MjcxM2M0OTI5Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.7ccftZsn9SKnPAzI4qsqccSGkIRZH4Q52AxjL0ohYbI',
       },
     })
       .then((response) => {
@@ -74,11 +75,27 @@ const Form = () => {
     });
     setError("");
 
+      // Fetch photos (backdrops)
+      axios
+      .get(`https://api.themoviedb.org/3/movie/${movie.id}/images`, {
+        headers: {
+          Accept: "application/json",
+          Authorization: 'Bearer ',
+        },
+      })
+      .then((response) => {
+        setPhotos(response.data.photos)
+      })
+      .catch(() => {
+        setError("Unable to load photos. Please try again later.");
+      });
+
+
     // Fetch Videos
     axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/videos?language=en-US`, {
       headers: {
         Accept: "application/json",
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A',  // Replace with actual API key',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwOGNmNjliZTNkOTE5MGE1Njk1ZDJmMTc4MzkxN2UzYiIsIm5iZiI6MTczMzM2NzQ3Mi4zMywic3ViIjoiNjc1MTE2YjA5OTA5MWU1MjcxM2M0OTI5Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.7ccftZsn9SKnPAzI4qsqccSGkIRZH4Q52AxjL0ohYbI',
       },
     })
     .then(response => {
@@ -92,7 +109,7 @@ const Form = () => {
     axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/credits?language=en-US`, {
       headers: {
         Accept: "application/json",
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A',  // Replace with actual API key',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwOGNmNjliZTNkOTE5MGE1Njk1ZDJmMTc4MzkxN2UzYiIsIm5iZiI6MTczMzM2NzQ3Mi4zMywic3ViIjoiNjc1MTE2YjA5OTA5MWU1MjcxM2M0OTI5Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.7ccftZsn9SKnPAzI4qsqccSGkIRZH4Q52AxjL0ohYbI',
       },
     })
     .then(response => {
@@ -210,7 +227,7 @@ const Form = () => {
           return axios.get(`https://api.themoviedb.org/3/movie/${movieData.tmdbId}/videos?language=en-US`, {
             headers: {
               Accept: "application/json",
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A',  // Replace with actual API key
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTdiNmUyNGJkNWRkNjhiNmE1ZWFjZjgyNWY3NGY5ZCIsIm5iZiI6MTcyOTI5NzI5Ny4wNzMzNTEsInN1YiI6IjY2MzhlZGM0MmZhZjRkMDEzMGM2NzM3NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZIX4EF2yAKl6NwhcmhZucxSQi1rJDZiGG80tDd6_9XI', // Replace with actual API key
             },
           });
         })
@@ -225,7 +242,7 @@ const Form = () => {
       axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`, {
         headers: {
           Accept: "application/json",
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A',  // Replace with actual API key
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2Q4YTQwMGVlMzFkMzQ4MGYzNjdlMjk2OGMzODhhZSIsIm5iZiI6MTczMzE1MTAyNS4yNTQwMDAyLCJzdWIiOiI2NzRkYzkzMTc0NzM3NzhiYmQ5YWY3YzUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.4wKA26LOjYKY3fGsk-zmp0YOvGr7YPfi_IWUf6W7MSE',  // Replace with actual API key
         },
       })
       .then(response => {
@@ -263,7 +280,7 @@ const Form = () => {
               placeholder="Enter movie title..."
               disabled={isLoading}
             />
-            <button
+            <button className="search-button"
               type="button"
               onClick={() => {
                 setCurrentPage(1);
@@ -285,23 +302,26 @@ const Form = () => {
               ))}
             </div>
             {totalPages > 1 && (
-              <div className="pagination">
-                <button
-                  onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-                  disabled={currentPage === 1 || isLoading}
-                >
-                  Previous
-                </button>
-                <span>
-                  Page {currentPage} of {totalPages}
-                </span>
-                <button
-                  onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
-                  disabled={currentPage === totalPages || isLoading}
-                >
-                  Next
-                </button>
-              </div>
+             <div className="pagination">
+             <button
+               className="pagination-button"
+               onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+               disabled={currentPage === 1 || isLoading}
+             >
+               Previous
+             </button>
+             <span>
+               Page {currentPage} of {totalPages}
+             </span>
+             <button
+               className="pagination-button"
+               onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+               disabled={currentPage === totalPages || isLoading}
+             >
+               Next
+             </button>
+           </div>
+
             )}
           </div>
           <hr />
@@ -422,10 +442,27 @@ const Form = () => {
         <p>No cast information available.</p>
       )}
     </div>
+    <div className="movie-photos">
+                <h3>Photos:</h3>
+                <div className="photo-grid">
+                  {photos.length > 0 ? (
+                    photos.map((photo, index) => (
+                      <img
+                        key={index}
+                        src={`https://image.tmdb.org/t/p/original/${photo.backdrop_path}`}
+                        alt={photo.title}
+                        className="movie-photo"
+                      />
+                    ))
+                  ) : (
+                    <p>No photos available.</p>
+                  )}
+                </div>
+              </div>
   </>
 )}
           <div className="button-container">
-            <button className="btn btn-primary"
+            <button className="btn btn-save"
               type="button"
               onClick={movieId ? handleUpdate : handleSave}
               disabled={isLoading}
