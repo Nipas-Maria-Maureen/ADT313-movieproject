@@ -37,7 +37,7 @@ url:
 `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=enUS&page=${currentPage}`,
 headers: {
 Accept: "application/json",
-Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2Q4YTQwMGVlMzFkMzQ4MGYzNjdlMjk2OGMzODhhZSIsIm5iZiI6MTczMzE1MTAyNS4yNTQwMDAyLCJzdWIiOiI2NzRkYzkzMTc0NzM3NzhiYmQ5YWY3YzUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.4wKA26LOjYKY3fGsk-zmp0YOvGr7YPfi_IWUf6W7MSE", // Replace with your actual API key
+Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A", // Replace with your actual API key
 },
 })
 .then((response) => {
@@ -76,19 +76,19 @@ const fetchMovieDetails = (movieId) => {
 setIsLoading(true);
 axios
 .get(`https://api.themoviedb.org/3/movie/${movieId}/credits`, {
-headers: { Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2Q4YTQwMGVlMzFkMzQ4MGYzNjdlMjk2OGMzODhhZSIsIm5iZiI6MTczMzE1MTAyNS4yNTQwMDAyLCJzdWIiOiI2NzRkYzkzMTc0NzM3NzhiYmQ5YWY3YzUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.4wKA26LOjYKY3fGsk-zmp0YOvGr7YPfi_IWUf6W7MSE" },
+headers: { Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A" },
 })
 .then((response) => setCast(response.data.cast))
 .catch((error) => console.error("Error fetching cast and crew", error));
 axios
 .get(`https://api.themoviedb.org/3/movie/${movieId}/images`, {
-headers: { Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2Q4YTQwMGVlMzFkMzQ4MGYzNjdlMjk2OGMzODhhZSIsIm5iZiI6MTczMzE1MTAyNS4yNTQwMDAyLCJzdWIiOiI2NzRkYzkzMTc0NzM3NzhiYmQ5YWY3YzUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.4wKA26LOjYKY3fGsk-zmp0YOvGr7YPfi_IWUf6W7MSE" },
+headers: { Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A" },
 })
 .then((response) => setPhotos(response.data.backdrops))
 .catch((error) => console.error("Error fetching photos", error));
 axios
 .get(`https://api.themoviedb.org/3/movie/${movieId}/videos`, {
-headers: { Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2Q4YTQwMGVlMzFkMzQ4MGYzNjdlMjk2OGMzODhhZSIsIm5iZiI6MTczMzE1MTAyNS4yNTQwMDAyLCJzdWIiOiI2NzRkYzkzMTc0NzM3NzhiYmQ5YWY3YzUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.4wKA26LOjYKY3fGsk-zmp0YOvGr7YPfi_IWUf6W7MSE" },
+headers: { Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzMxOTJmZDA2YjM2NzJkZjVjM2Y3OWExYzMyNWY2MiIsIm5iZiI6MTcyOTc0MTczNC4xNCwic3ViIjoiNjcxOWMzYTY5ZmY2ODFkOWUwYTNiYzFkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gsdCgpo6zw-DRUqeOa4B6ZmLb_HslXw_PhiVYkQz90A"},
 })
 .then((response) => setVideos(response.data.results))
 .catch((error) => console.error("Error fetching videos", error))
