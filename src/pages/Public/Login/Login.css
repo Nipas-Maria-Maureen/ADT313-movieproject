@@ -1,99 +1,162 @@
+
 .Login {
   height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(to bottom,rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52)),url(background.jpeg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.8)
+    ),
+    url(background.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
-
 
 
 .main-container {
-  width: 320px;
-  border-radius: 0.75rem;
-  background-color: #000000;
-  padding: 2rem;
-  color: rgba(243, 244, 246, 1);
+  width: 400px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.5rem;
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.main-container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
 }
 
 .main-container h3 {
-  font-size: 1.5rem;
+  font-size: 2.2rem;
+  color: #ff7f50; 
   margin-bottom: 1rem;
-  color: #fff;
+  background: linear-gradient(to right, #ff7f50, #ffd700);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+.main-container .subtext {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
 
 .form-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-}
-
-.form-group {
-  margin-top: 0.25rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  gap: 1.5rem;
 }
 
 .form-group label {
+  font-size: 0.9rem;
+  color: #d1d5db; 
   display: block;
-  color: rgba(156, 163, 175, 1);
-  margin-bottom: 4px;
+  margin-bottom: 0.5rem;
 }
 
 .form-group input {
-  padding: 0.8rem;
-  font-size: 1rem;
-  background: #5a2a3a; /* Dark maroon color similar to the sample */
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  outline: none;
   width: 100%;
+  padding: 0.9rem;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  outline: none;
+  transition: box-shadow 0.3s ease-in-out, border 0.3s ease-in-out;
 }
 
 .form-group input:focus {
-  border-color: rgba(167, 139, 250);
+  border: 1px solid #ff7f50;
+  box-shadow: 0 0 8px rgba(255, 127, 80, 0.8); 
 }
 
-.submit-container {
-  margin-top: 1rem;
-}
 
 .btn-primary {
-  display: block;
-  width: 100%;
-  background-color: burlywood;
-  padding: 0.75rem;
-  text-align: center;
-  color: rgba(17, 24, 39, 1);
+  background: linear-gradient(to right, #ff7f50, #ff4500); 
+  color: #ffffff;
+  padding: 0.9rem;
+  font-size: 1.2rem;
+  font-weight: bold;
   border: none;
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 800;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.btn:hover {
-  background-color: burlywood;
+.btn-primary:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(255, 127, 80, 0.8); 
 }
+
 
 .register-container {
-  grid-column: span 2; /* Centers the login text below the form */
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   font-size: 0.9rem;
-  color: #aaa;
-  text-align: center;
+  color: #d1d5db;
 }
 
 .register-container a {
-  color: #fff;
+  color: #ff7f50;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .register-container a:hover {
   text-decoration: underline;
+  color: #ff4500;
+}
+
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  flex: 1;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: rgba(243, 244, 246, 0.8);
+  transition: color 0.3s ease-in-out;
+}
+
+.password-toggle-icon:hover {
+  color: #ff7f50;
+}
+
+
+.errors {
+  font-size: 0.8rem;
+  color: #ff4500;
+}
+
+
+@media (max-width: 480px) {
+  .main-container {
+    width: 90%;
+    padding: 2rem;
+  }
+
+  .btn-primary {
+    font-size: 1rem;
+    padding: 0.7rem;
+  }
 }

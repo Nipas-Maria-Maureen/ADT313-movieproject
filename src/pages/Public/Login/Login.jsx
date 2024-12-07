@@ -1,60 +1,65 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
-import './Login.css';
-import { useNavigate } from 'react-router-dom';
-import { useDebounce } from '../../util/hooks/useDebounce';
-import axios from 'axios';
+import { useState, useRef, useCallback, useEffect } from "react";
+import "./Login.css";
+import { useNavigate } from "react-router-dom";
+import { useDebounce } from "../../util/hooks/useDebounce";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isFieldsDirty, setIsFieldsDirty] = useState(false);
-  const [isShowPassword, setIsShowPassword] = useState(false);
-  const [status, setStatus] = useState('idle');
   const emailRef = useRef();
   const passwordRef = useRef();
-  const navigate = useNavigate();
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const userInputDebounce = useDebounce({ email, password }, 2000);
   const [debounceState, setDebounceState] = useState(false);
+  const [status, setStatus] = useState("idle");
+
+  const navigate = useNavigate();
 
   const handleShowPassword = useCallback(() => {
-    setIsShowPassword((prev) => !prev);
-  }, []);
+    setIsShowPassword((value) => !value);
+  }, [isShowPassword]);
 
   const handleOnChange = (event, type) => {
     setDebounceState(false);
     setIsFieldsDirty(true);
 
-    if (type === 'email') setEmail(event.target.value);
-    if (type === 'password') setPassword(event.target.value);
+    if (type === "email") setEmail(event.target.value);
+    if (type === "password") setPassword(event.target.value);
   };
 
   const handleLogin = async () => {
-    if (!email || !password) {
-      setIsFieldsDirty(true);
-      if (!email) emailRef.current.focus();
-      if (!password) passwordRef.current.focus();
-      return;
-    }
-
     const data = { email, password };
-    setStatus('loading');
-    try {
-      const res = await axios.post('/admin/login', data, {
-        headers: { 'Access-Control-Allow-Origin': '*' },
+    setStatus("loading");
+
+    await axios({
+      method: "post",
+      url: "/admin/login",
+      data,
+      headers: { "Access-Control-Allow-Origin": "*" },
+    })
+      .then((res) => {
+        localStorage.setItem("accessToken", res.data.access_token);
+        navigate("/main/movies");
+        setStatus("idle");
+      })
+      .catch((e) => {
+        console.error(e);
+        setStatus("idle");
       });
-      localStorage.setItem('accessToken', res.data.access_token);
-      navigate('/main/movies');
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setStatus('idle');
-    }
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      handleLogin();
+    if (e.key === "Enter") {
+      e.preventDefault(); 
+      if (email && password) {
+        handleLogin();
+      } else {
+        setIsFieldsDirty(true);
+      }
     }
   };
 
@@ -63,64 +68,63 @@ function Login() {
   }, [userInputDebounce]);
 
   return (
-    <div className="Login" onKeyDown={handleKeyDown}>
+    <div className="Login">
       <div className="main-container">
-        <h3>Sign In</h3>
-        <form>
+        <h3>Welcome Back!</h3>
+        <p className="subtext">Sign in to continue to your account</p>
+        <form onKeyDown={handleKeyDown}>
           <div className="form-container">
-            <div>
-              <div className="form-group">
-                <label>E-mail:</label>
-                <input
-                  type="text"
-                  name="email"
-                  ref={emailRef}
-                  onChange={(e) => handleOnChange(e, 'email')}
-                  value={email}
-                />
-              </div>
-              {debounceState && isFieldsDirty && !email && (
-                <span className="errors">This field is required</span>
+            <div className="form-group">
+              <label htmlFor="email">E-mail:</label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                ref={emailRef}
+                onChange={(e) => handleOnChange(e, "email")}
+              />
+              {debounceState && isFieldsDirty && email === "" && (
+                <span className="errors">Email is required</span>
               )}
             </div>
-            <div>
-              <div className="form-group">
-                <label>Password:</label>
+            <div className="form-group">
+              <label htmlFor="password">Password:</label>
+              <div className="password-container">
                 <input
-                  type={isShowPassword ? 'text' : 'password'}
+                  type={isShowPassword ? "text" : "password"}
+                  id="password"
                   name="password"
                   ref={passwordRef}
-                  onChange={(e) => handleOnChange(e, 'password')}
-                  value={password}
+                  onChange={(e) => handleOnChange(e, "password")}
+                />
+                <FontAwesomeIcon
+                  icon={isShowPassword ? faEyeSlash : faEye}
+                  className="password-toggle-icon"
+                  onClick={handleShowPassword}
                 />
               </div>
-              {debounceState && isFieldsDirty && !password && (
-                <span className="errors">This field is required</span>
+              {debounceState && isFieldsDirty && password === "" && (
+                <span className="errors">Password is required</span>
               )}
             </div>
-            <div
-              className="show-password"
-              onClick={handleShowPassword}
-              role="button"
-              tabIndex={0}
+            <button
+              className="btn-primary"
+              type="button"
+              disabled={status === "loading"}
+              onClick={() => {
+                if (email && password) {
+                  handleLogin();
+                } else {
+                  setIsFieldsDirty(true);
+                }
+              }}
             >
-              {isShowPassword ? 'Hide' : 'Show'} Password
-            </div>
-
-            <div className="submit-container">
-              <button
-                className="btn-primary"
-                type="button"
-                disabled={status === 'loading'}
-                onClick={handleLogin}
-              >
-                {status === 'idle' ? 'Login' : 'Loading, Please wait...'}
-              </button>
-            </div>
+              {status === "idle" ? "Login" : "Loading..."}
+            </button>
             <div className="register-container">
-              <small>Don't have an account? </small>
+              <small>Don't have an account?</small>
               <a href="/register">
-                <small>Register</small>
+                <small> Register</small>
               </a>
             </div>
           </div>
