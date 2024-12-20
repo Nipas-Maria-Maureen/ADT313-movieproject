@@ -1,93 +1,226 @@
 
-.lists-container {
-  width: 100%;
-  display: flex;
-  color: #ffffff;
-  flex-direction: column;
-}
-.create-container {
-  align-self: flex-end;
-  margin: 1rem 0;
-}
-.table-container,
-.movie-lists {
-  width: 100%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.table-container {
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  transition: background-color 0.3s ease;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
   text-align: center;
 }
 
-button {
-  width: 70px;
-  color: white;
-  margin-left: 5px;
-  padding: 8px;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
+.lists-container {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.8)
+  ),
+  url(backgroundmovies.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  transition: transform 0.3s ease;
 }
 
-.delete {
-  background-color: burlywood;
+.lists-container:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  transform: translateY(1%) scale(1.01);
 }
 
-.delete:hover {
-  background-color: burlywood;
-  transform: scale(1.05);
-}
-
-.delete:active {
-  transform: scale(1);
-}
-
-.edit {
-  background-color: bisque;
-}
-
-.edit:hover {
-  background-color: burlywood;
-  transform: scale(1.05);
-}
-
-.edit:active {
-  transform: scale(1);
-}
-
-.edit:disabled {
-  background-color: #555;
-  cursor: not-allowed;
+.create-container {
+  text-align: right;
+  margin-bottom: 20px;
 }
 
 .create {
-  background-color: bisque;
-  font-size: 16px;
-  font-weight: bold;
+  background-color: #28a745;
   border: none;
-  width: 150px;
-  margin-right: 20px;
-  border-radius: 4px;
-  padding: 12px 24px;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: all 0.3s ease;
 }
 
 .create:hover {
-  background-color: burlywood;
+  background-color: #218838;
   transform: scale(1.05);
 }
 
-.create:active {
-  transform: scale(1);
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
 }
 
-.create:disabled {
+.movie-lists {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #2c2c2c;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.movie-lists th,
+.movie-lists td {
+  text-align: left;
+  padding: 12px 16px;
+}
+
+.movie-lists th {
+  background-color: #444;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.movie-lists tr:nth-child(even) {
+  background-color: #333;
+}
+
+.movie-lists tr:hover {
   background-color: #555;
-  cursor: not-allowed;
+  transition: background-color 0.2s ease;
 }
 
+.id-cell{
+  color: white;
+}
 
-.tile-cell{
-  text-align: justify;
+.title-cell {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 1rem;
+  color: #d0d0d0;
+  width: 100%;
+}
+
+.action-cell {
+  width: 25%;
+}
+
+button {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button.edit {
+  background-color: #007BFF;
+  color: #ffffff;
+}
+
+button.edit:hover {
+  background-color: #0056b3;
+}
+
+button.delete {
+  background-color: #FF3B30;
+  color: #ffffff;
+  margin-left: 10px;
+}
+
+button.delete:hover {
+  background-color: #d32f2f;
+}
+
+.movie-poster{
+  width: 20%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .lists-container {
+    width: 100%;
+    padding: 15px;
+    transform: translateY(0);
+  }
+
+  .movie-lists th,
+  .movie-lists td {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  .create-container {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .create {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .lists-container {
+    padding: 10px;
+  }
+
+  .movie-lists th,
+  .movie-lists td {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+
+  .create {
+    font-size: 1rem;
+    padding: 14px;
+  }
+
+  button {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+
+  button.edit, button.delete {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 5px;
+  }
+
+
 }
